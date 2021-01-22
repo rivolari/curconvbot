@@ -14,7 +14,7 @@ def help(message: telebot.types.Message):
         '\nколичество' \
     '\n   '\
     '\nпример:' \
-    '\nтенге' \
+    '\nкрона' \
     '\nевро' \
     '\n200' \
  \
