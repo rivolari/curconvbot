@@ -1,5 +1,7 @@
 import telebot
-
+import lxml.html
+import requests
+import json
 
 TOKEN = '1567872420:AAFFNuT4x8uf1pPZ6xuWPhyqs6y9QcDhWyU'
 
@@ -14,7 +16,7 @@ def help(message: telebot.types.Message):
         '\nколичество' \
     '\n   '\
     '\nпример:' \
-    '\nкрона' \
+    '\nтенге' \
     '\nевро' \
     '\n200' \
  \
@@ -33,9 +35,21 @@ def values(message: telebot.types.Message):
 @bot.message_handler(content_types=['text',])
 def convert(message: telebot.types.Message):
     quote, base, amount = message.text.split(' ')
-    r = request.get(f'https://api.exchangeratesapi.io/latest=)
+    r = request.get(f'https://api.exchangeratesapi.io/latest')
     total_base = json.loads(r.content)[keys[base]]
     text = json.loads(r.content)[keys[base]]
     bot.send_message(message.chat.id, text)
+
+html = requests.get('').content
+
+tree = etree.parse('FER API htm',
+                       lxml.html.HTMLParser())
+
+ul = tree.findall(
+        'https://api.exchangeratesapi.io/latest=')
+
+    for li in ul:
+    rate = li.find('a') 
+    amount= li.find('time')
 
 bot.polling(none_stop=True)
